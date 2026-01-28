@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dead Simple Systems</title>
-  <meta name="description" content="Dead Simple Systems — It just works. We simplify audio, video, networks, and control systems so they’re reliable and obvious." />
+  <meta name="description" content="Dead Simple Systems — It just works. We simplify messy tech systems so they’re obvious, reliable, and easy to maintain." />
 
   <style>
     :root{
@@ -15,11 +15,11 @@
       --border: rgba(255,255,255,.12);
       --text:#f3f5f8;
       --muted: rgba(243,245,248,.72);
-      --muted2: rgba(243,245,248,.55);
+      --muted2: rgba(243,245,248,.58);
       --accent:#9ad1ff;
       --accent2:#bda6ff;
       --good:#6cf0c2;
-      --shadow: 0 20px 70px rgba(0,0,0,.55);
+      --shadow: 0 20px 80px rgba(0,0,0,.55);
       --radius: 18px;
     }
 
@@ -37,7 +37,7 @@
       overflow-x:hidden;
     }
 
-    /* Subtle animated “fog” */
+    /* Subtle animated “fog” / glow */
     .fog{
       position:fixed;
       inset:-40%;
@@ -45,8 +45,8 @@
         radial-gradient(circle at 30% 30%, rgba(154,209,255,.10), transparent 45%),
         radial-gradient(circle at 70% 40%, rgba(189,166,255,.10), transparent 45%),
         radial-gradient(circle at 55% 75%, rgba(108,240,194,.08), transparent 50%);
-      filter: blur(40px);
-      opacity:.65;
+      filter: blur(44px);
+      opacity:.62;
       animation: drift 18s ease-in-out infinite alternate;
       pointer-events:none;
       z-index:0;
@@ -61,15 +61,15 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      padding: 64px 18px;
+      padding: 56px 18px;
       position:relative;
       z-index:1;
     }
 
     .shell{
-      width: min(980px, 100%);
+      width: min(1040px, 100%);
       display:grid;
-      gap: 18px;
+      gap: 16px;
     }
 
     .card{
@@ -95,15 +95,17 @@
         rgba(255,255,255,0) 75%);
       opacity:.35;
       pointer-events:none;
-      transform: translateX(-22%);
+      transform: translateX(-20%);
     }
 
-    .hero{
-      padding: 46px 40px 34px 40px;
+    header{
+      padding: 44px 44px 28px 44px;
       text-align:center;
+      position:relative;
     }
 
-    .badge{
+    /* little “status” pill */
+    .pill{
       display:inline-flex;
       align-items:center;
       gap:10px;
@@ -122,11 +124,13 @@
       box-shadow: 0 0 18px rgba(154,209,255,.35);
     }
 
+    /* name + tagline prominent, not shouty */
     h1{
       margin: 0;
-      font-size: clamp(34px, 5vw, 52px);
-      letter-spacing: -0.03em;
-      line-height:1.05;
+      font-size: clamp(34px, 5.2vw, 56px);
+      letter-spacing: -0.035em;
+      line-height: 1.05;
+      font-weight: 680;
     }
 
     .tagline{
@@ -134,7 +138,15 @@
       max-width: 62ch;
       color: var(--muted);
       font-size: clamp(15px, 2.1vw, 18px);
-      line-height: 1.6;
+      line-height: 1.65;
+    }
+
+    .subline{
+      margin: 14px auto 0 auto;
+      max-width: 70ch;
+      color: var(--muted2);
+      font-size: 14px;
+      line-height: 1.65;
     }
 
     .ctaRow{
@@ -156,23 +168,27 @@
       background: rgba(0,0,0,.18);
       color: var(--text);
       text-decoration:none;
-      font-weight: 600;
+      font-weight: 650;
       letter-spacing:.01em;
       transition: transform .15s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease;
       user-select:none;
+      cursor:pointer;
     }
     .btn:hover{
       transform: translateY(-1px);
       border-color: rgba(154,209,255,.35);
-      box-shadow: 0 18px 50px rgba(0,0,0,.35);
+      box-shadow: 0 18px 60px rgba(0,0,0,.35);
     }
     .btnPrimary{
       border-color: rgba(154,209,255,.35);
-      background: linear-gradient(90deg, rgba(154,209,255,.18), rgba(189,166,255,.14));
+      background: linear-gradient(90deg, rgba(154,209,255,.20), rgba(189,166,255,.14));
     }
     .btnPrimary:hover{
-      border-color: rgba(154,209,255,.55);
-      box-shadow: 0 18px 70px rgba(154,209,255,.10), 0 18px 50px rgba(0,0,0,.35);
+      border-color: rgba(154,209,255,.60);
+      box-shadow: 0 18px 80px rgba(154,209,255,.10), 0 18px 60px rgba(0,0,0,.35);
+    }
+    .btnGhost{
+      color: rgba(243,245,248,.86);
     }
 
     .btnIcon{
@@ -184,7 +200,7 @@
 
     .grid{
       display:grid;
-      grid-template-columns: 1.2fr .8fr;
+      grid-template-columns: 1.15fr .85fr;
       gap: 14px;
       padding: 0 18px 18px 18px;
     }
@@ -198,10 +214,52 @@
 
     .panel h3{
       margin: 0 0 10px 0;
-      font-size: 14px;
-      letter-spacing:.08em;
+      font-size: 13px;
+      letter-spacing:.10em;
       text-transform: uppercase;
       color: rgba(243,245,248,.78);
+    }
+
+    .value{
+      display:grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .valueItem{
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+
+    .icon{
+      min-width: 28px;
+      height: 28px;
+      border-radius: 10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 22px rgba(154,209,255,.18);
+      color: rgba(7,8,11,.92);
+      font-weight: 900;
+      margin-top: 1px;
+    }
+
+    .valueItem b{
+      display:block;
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+    .valueItem span{
+      color: var(--muted2);
+      font-size: 13px;
+      line-height: 1.55;
+      display:block;
     }
 
     .chips{
@@ -215,7 +273,7 @@
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.05);
-      color: rgba(243,245,248,.82);
+      color: rgba(243,245,248,.84);
       font-size: 13px;
       transition: border-color .15s ease, transform .15s ease;
       white-space:nowrap;
@@ -225,43 +283,30 @@
       transform: translateY(-1px);
     }
 
-    .steps{
-      display:grid;
-      gap: 10px;
-      margin-top: 8px;
-    }
-    .step{
+    .proof{
+      margin-top: 10px;
       display:flex;
-      gap: 12px;
-      align-items:flex-start;
-      padding: 12px 12px;
-      border-radius: 14px;
+      flex-wrap:wrap;
+      gap: 10px;
+    }
+    .proofCard{
+      flex: 1 1 180px;
       border: 1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.04);
+      border-radius: 14px;
+      padding: 12px 12px;
     }
-    .num{
-      min-width: 28px;
-      height: 28px;
-      border-radius: 10px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight: 700;
-      color: rgba(7,8,11,.92);
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      box-shadow: 0 0 22px rgba(154,209,255,.18);
-      margin-top: 1px;
-    }
-    .step b{
-      display:block;
-      font-size: 14px;
-      margin-bottom: 2px;
-    }
-    .step span{
-      color: var(--muted2);
+    .proofCard .k{
       font-size: 13px;
-      line-height: 1.5;
-      display:block;
+      color: rgba(243,245,248,.70);
+      letter-spacing:.06em;
+      text-transform: uppercase;
+    }
+    .proofCard .v{
+      margin-top: 6px;
+      font-size: 14px;
+      color: rgba(243,245,248,.90);
+      line-height:1.4;
     }
 
     .footer{
@@ -275,21 +320,78 @@
       font-size: 13px;
     }
     .footer a{
-      color: rgba(154,209,255,.9);
+      color: rgba(154,209,255,.92);
       text-decoration:none;
       border-bottom: 1px solid rgba(154,209,255,.25);
       padding-bottom:2px;
     }
     .footer a:hover{ border-bottom-color: rgba(154,209,255,.55); }
 
+    /* Modal */
+    .modalOverlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.62);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+      z-index: 50;
+    }
+    .modal{
+      width: min(620px, 100%);
+      border: 1px solid rgba(255,255,255,.14);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.05));
+      border-radius: 16px;
+      box-shadow: 0 30px 120px rgba(0,0,0,.70);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 18px;
+      position:relative;
+    }
+    .modal h4{
+      margin: 6px 0 8px 0;
+      font-size: 16px;
+      letter-spacing:-0.01em;
+    }
+    .modal p{
+      margin: 0 0 14px 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .modal .row{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+    }
+    .modal .small{
+      font-size: 13px;
+      color: rgba(243,245,248,.55);
+      margin-top: 10px;
+    }
+    .x{
+      position:absolute;
+      top: 10px;
+      right: 10px;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      color: rgba(243,245,248,.92);
+      cursor:pointer;
+      transition: transform .15s ease, border-color .15s ease;
+    }
+    .x:hover{ transform: translateY(-1px); border-color: rgba(154,209,255,.35); }
+
     /* Responsive */
-    @media (max-width: 840px){
-      .hero{ padding: 40px 18px 26px 18px; }
+    @media (max-width: 920px){
+      header{ padding: 40px 18px 24px 18px; }
       .grid{ grid-template-columns: 1fr; padding: 0 14px 14px 14px; }
       .panel{ padding: 16px; }
     }
 
-    /* Reduce motion */
     @media (prefers-reduced-motion: reduce){
       .fog{ animation:none; }
       .btn, .chip{ transition:none; }
@@ -302,20 +404,19 @@
 
   <main class="wrap">
     <section class="shell card" aria-label="Dead Simple Systems">
-      <header class="hero">
-        <div class="badge">
-          <span class="dot"></span>
-          <span>Dead Simple Systems</span>
-        </div>
+      <header>
+        <div class="pill"><span class="dot"></span><span>Systems cleanup + reliability</span></div>
 
-        <h1>It just works.</h1>
-        <p class="tagline">
-          We simplify tech systems that have grown messy over time — audio, video, networks, and control —
-          so they’re obvious, reliable, and easy to maintain.
+        <h1>Dead Simple Systems</h1>
+        <p class="tagline">It just works.</p>
+
+        <p class="subline">
+          If your setup only works when “the tech person” is around, it’s too fragile.
+          We simplify audio, video, networks, and control so it’s obvious, reliable, and easy to run.
         </p>
 
         <div class="ctaRow">
-          <a class="btn btnPrimary" href="mailto:connor@deadsimplesystems.com?subject=Dead%20Simple%20Systems%20—%20quick%20question">
+          <a class="btn btnPrimary" href="mailto:contact@deadsimplesystems.com?subject=Dead%20Simple%20Systems%20—%20help%20with%20my%20setup&body=Quick%20context%3A%0A%0AWhat%20are%20you%20trying%20to%20make%20work%3F%0AWhat%20keeps%20breaking%20or%20feels%20fragile%3F%0AWhere%20are%20you%20located%20(or%20remote)%3F%0A%0AAny%20links%20or%20photos%20welcome.">
             <svg class="btnIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M4 7.5v9A2.5 2.5 0 0 0 6.5 19h11A2.5 2.5 0 0 0 20 16.5v-9A2.5 2.5 0 0 0 17.5 5h-11A2.5 2.5 0 0 0 4 7.5Z" stroke="currentColor" stroke-width="1.6"/>
               <path d="m5.5 7 6.2 5.1c.8.65 1.8.65 2.6 0L20.5 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
@@ -323,48 +424,90 @@
             Contact
           </a>
 
-          <a class="btn" href="mailto:contact@deadsimplesystems.com?subject=Dead%20Simple%20Systems%20inquiry">
-            Email: contact@
-          </a>
+          <button class="btn btnGhost" id="openModal" type="button" aria-haspopup="dialog" aria-controls="contactModal">
+            What to include
+          </button>
         </div>
       </header>
 
       <div class="grid">
         <div class="panel">
-          <h3>What we simplify</h3>
-          <div class="chips" role="list">
-            <span class="chip" role="listitem">Audio + playback systems</span>
-            <span class="chip" role="listitem">Video + routing</span>
-            <span class="chip" role="listitem">Wi-Fi + networks</span>
-            <span class="chip" role="listitem">Control + automation</span>
-            <span class="chip" role="listitem">Signal flow sanity</span>
-            <span class="chip" role="listitem">Power + reliability</span>
-            <span class="chip" role="listitem">Documentation</span>
+          <h3>What we do</h3>
+
+          <div class="value">
+            <div class="valueItem">
+              <div class="icon">✓</div>
+              <div>
+                <b>Make the system legible</b>
+                <span>Clear signal flow, clean routing, and fewer “mystery settings.”</span>
+              </div>
+            </div>
+            <div class="valueItem">
+              <div class="icon">✓</div>
+              <div>
+                <b>Remove failure modes</b>
+                <span>Fix the weak points so it survives unplugging, updates, and new people.</span>
+              </div>
+            </div>
+            <div class="valueItem">
+              <div class="icon">✓</div>
+              <div>
+                <b>Leave you with a plan</b>
+                <span>Simple docs + a runbook so it keeps working after we’re gone.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="proof" aria-label="Proof points">
+            <div class="proofCard">
+              <div class="k">Outcome</div>
+              <div class="v">Fewer surprises. Faster setup. Less gear-buying.</div>
+            </div>
+            <div class="proofCard">
+              <div class="k">Style</div>
+              <div class="v">Practical fixes first, fancy upgrades only when they matter.</div>
+            </div>
+            <div class="proofCard">
+              <div class="k">Fit</div>
+              <div class="v">Studios, bands, venues, small teams, weird DIY setups.</div>
+            </div>
           </div>
         </div>
 
         <div class="panel">
-          <h3>How it works</h3>
-          <div class="steps">
-            <div class="step">
-              <div class="num">1</div>
+          <h3>What we simplify</h3>
+          <div class="chips" role="list">
+            <span class="chip" role="listitem">Audio + playback</span>
+            <span class="chip" role="listitem">Video + routing</span>
+            <span class="chip" role="listitem">Wi-Fi + networks</span>
+            <span class="chip" role="listitem">Control + automation</span>
+            <span class="chip" role="listitem">Power + reliability</span>
+            <span class="chip" role="listitem">Docs + handoff</span>
+          </div>
+
+          <div style="height:14px"></div>
+
+          <h3>Quick process</h3>
+          <div class="value">
+            <div class="valueItem">
+              <div class="icon">1</div>
               <div>
-                <b>Quick audit</b>
-                <span>What’s connected, what breaks, and where complexity is hiding.</span>
+                <b>Audit</b>
+                <span>Understand what it does + why it’s fragile.</span>
               </div>
             </div>
-            <div class="step">
-              <div class="num">2</div>
+            <div class="valueItem">
+              <div class="icon">2</div>
               <div>
-                <b>Fix the weak points</b>
-                <span>Remove failure modes, simplify routing, reduce “mystery settings.”</span>
+                <b>Simplify</b>
+                <span>Fix weak points and reduce complexity.</span>
               </div>
             </div>
-            <div class="step">
-              <div class="num">3</div>
+            <div class="valueItem">
+              <div class="icon">3</div>
               <div>
-                <b>Make it maintainable</b>
-                <span>Clear docs + a setup that survives future changes and new people.</span>
+                <b>Lock it in</b>
+                <span>Docs + simple rules so it stays clean.</span>
               </div>
             </div>
           </div>
@@ -374,10 +517,95 @@
       <footer class="footer">
         <div>Seattle area + remote consults.</div>
         <div>
-          <a href="mailto:connor@deadsimplesystems.com?subject=Dead%20Simple%20Systems%20—%20let%E2%80%99s%20talk">connor@deadsimplesystems.com</a>
+          <a href="mailto:contact@deadsimplesystems.com?subject=Dead%20Simple%20Systems%20—%20help%20with%20my%20setup">contact@deadsimplesystems.com</a>
         </div>
       </footer>
     </section>
   </main>
+
+  <!-- Fancy but lightweight modal (no external libs) -->
+  <div class="modalOverlay" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <button class="x" id="closeModal" type="button" aria-label="Close">✕</button>
+      <h4 id="modalTitle">What to include in your email</h4>
+      <p>
+        Two minutes of context helps us get you an answer fast. Copy/paste this and fill in what you can:
+      </p>
+
+      <div class="panel" style="margin: 0; padding: 14px; background: rgba(0,0,0,.12);">
+        <div style="white-space:pre-wrap; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 12.5px; color: rgba(243,245,248,.88); line-height: 1.55;">
+What are you trying to make work?
+
+What keeps breaking (or feels fragile)?
+
+Where is this happening (Seattle / remote)?
+
+Any photos, gear list, or diagrams?
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 12px;">
+        <a class="btn btnPrimary" href="mailto:contact@deadsimplesystems.com?subject=Dead%20Simple%20Systems%20—%20help%20with%20my%20setup&body=What%20are%20you%20trying%20to%20make%20work%3F%0A%0AWhat%20keeps%20breaking%20(or%20feels%20fragile)%3F%0A%0AWhere%20is%20this%20happening%20(Seattle%20%2F%20remote)%3F%0A%0AAny%20photos%2C%20gear%20list%2C%20or%20diagrams%3F%0A">
+          Email contact@
+        </a>
+        <button class="btn" id="copyTemplate" type="button">Copy template</button>
+      </div>
+
+      <div class="small">We’ll reply with next steps, a few questions, and a simple plan.</div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const openBtn = document.getElementById('openModal');
+      const closeBtn = document.getElementById('closeModal');
+      const overlay = document.getElementById('contactModal');
+      const copyBtn = document.getElementById('copyTemplate');
+
+      const template =
+`What are you trying to make work?
+
+What keeps breaking (or feels fragile)?
+
+Where is this happening (Seattle / remote)?
+
+Any photos, gear list, or diagrams?`;
+
+      function openModal(){
+        overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      }
+      function closeModal(){
+        overlay.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+
+      openBtn.addEventListener('click', openModal);
+      closeBtn.addEventListener('click', closeModal);
+      overlay.addEventListener('click', (e) => { if(e.target === overlay) closeModal(); });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && overlay.style.display === 'flex') closeModal();
+      });
+
+      copyBtn.addEventListener('click', async () => {
+        try{
+          await navigator.clipboard.writeText(template);
+          copyBtn.textContent = 'Copied';
+          setTimeout(() => copyBtn.textContent = 'Copy template', 1200);
+        }catch(err){
+          // fallback
+          const ta = document.createElement('textarea');
+          ta.value = template;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          copyBtn.textContent = 'Copied';
+          setTimeout(() => copyBtn.textContent = 'Copy template', 1200);
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
